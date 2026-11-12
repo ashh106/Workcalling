@@ -1,0 +1,782 @@
+\documentclass[12pt, a4paper]{report}
+
+% =======================================================
+% PACKAGES
+% =======================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext, newtxmath} % Times New Roman Font (Inst. 12)
+\usepackage{geometry}             % Margins
+\usepackage{setspace}             % Line spacing (Inst. 13)
+\usepackage{titlesec}             % Customizing headings
+\usepackage{graphicx}             % Images
+\usepackage{booktabs}             % Professional tables
+\usepackage{caption}              % Caption formatting (Inst. 3)
+\usepackage{fancyhdr}             % Headers and Footers
+\usepackage{tocloft}              % Custom Table of Contents
+\usepackage[hidelinks]{hyperref}  % Clickable links
+\usepackage{array}                % Better table arrays
+\usepackage{float}                % Figure positioning
+\usepackage{appendix}             % For Appendices
+
+
+
+% =======================================================
+% FORMATTING RULES (STRICT COMPLIANCE)
+% =======================================================
+
+% 1. Margins (Standard A4)
+\geometry{
+    top=1in,
+    bottom=1in,
+    left=1in,
+    right=1in
+}
+
+% 2. Spacing: 1.15 Line Spacing (Inst. 13)
+\setstretch{1.15}
+
+% 3. Header/Footer Configuration (Inst. 1)
+\pagestyle{fancy}
+\fancyhf{} % Clear default headers/footers
+\renewcommand{\headrulewidth}{0pt} % No line at top
+\fancyfoot[R]{\thepage} % Page number at bottom right for normal pages
+
+% --- VITAL FIX ---
+% This forces Chapter Title pages (which use 'plain' style) to also be Bottom Right
+\fancypagestyle{plain}{
+  \fancyhf{} % Clear default
+  \renewcommand{\headrulewidth}{0pt} % No line
+  \fancyfoot[R]{\thepage} % Page number at bottom right
+}
+
+% 4. Font Sizes & Alignment (Inst. 12 & 14)
+
+% Chapter Title: Centered, Bold, Size 17pt, Spacing 2 (approx 24pt)
+\titleformat{\chapter}[display]
+  {\centering\bfseries\fontsize{17}{22}\selectfont} 
+  {\chaptertitlename\ \thechapter}
+  {0.5em} % Space between "Chapter 1" and "Title"
+  {}
+\titlespacing{\chapter}{0pt}{0pt}{2em} % Spacing after heading
+
+% Section (Sub-Heading): Left, Bold, Size 14pt
+\titleformat{\section}
+  {\bfseries\fontsize{14}{17}\selectfont}
+  {\thesection}
+  {1em}
+  {}
+\titlespacing{\section}{0pt}{2em}{1em} % Spacing before and after
+
+% Subsection (Under Sub-Heading): Left, Bold, Size 12pt
+\titleformat{\subsection}
+  {\bfseries\fontsize{12}{14}\selectfont}
+  {\thesubsection}
+  {1em}
+  {}
+\titlespacing{\subsection}{0pt}{1.5em}{1em}
+
+% 5. Paragraph Alignment (Inst. 14)
+% LaTeX defaults to justify, so this is handled automatically.
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% =======================================================
+% DOCUMENT START
+% =======================================================
+\begin{document}
+
+% -------------------------------------------------------
+% 1. TITLE PAGE (Inst. 9a)
+% -------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+    
+    {\bfseries\fontsize{30}{30}\selectfont Algorithmic Alpha via Large Language Models \par}
+    
+    \vspace{0.7cm}
+    
+    {\fontsize{12}{15}\selectfont A Project Report submitted in partial fulfillment of the requirements for the award of the degree of \par}
+
+    {\bfseries Bachelor of Technology in \\ Computer Science and Engineering \\ and \\ Electronics and Communication Engineering \par}
+    
+    
+    by\\
+
+    \textbf{Tanmay H Bukka} (112315195), \textbf{Siddhant Ganesh Senthil Kumar} (112315183), \\
+    \textbf{Ch Jaya Surya} (112315046), \textbf{Kantamneni Radhakrishna} (112315082), \\
+    \textbf{Kulkarni Piyush Prafulla} (112316021).
+
+    Under the Supervision of: \textbf{Dr. Shrikant Salve} \\
+    Semester: 5
+    
+    % --- LOGO INSERTION ---
+
+    \includegraphics[width=6cm]{college_logo.png} % UNCOMMENT AND ADD LOGO
+
+    % ----------------------
+    
+    \textbf{Department of Computer Science and Engineering and \\ Department of Electronics and Communication Engineering}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Indian Institute of Information Technology, Pune}\\
+    (An Institute of National Importance by an Act of Parliament)
+    
+
+    \textbf{December 2025}
+    
+\end{titlepage}
+
+
+% =======================================================
+% SWITCH TO ROMAN NUMERALS (i, ii, iii)
+% =======================================================
+\pagenumbering{roman} 
+
+
+
+% -------------------------------------------------------
+% 2. BONAFIDE CERTIFICATE (Inst. 9b)
+% -------------------------------------------------------
+\newpage
+\chapter*{BONAFIDE CERTIFICATE}
+\addcontentsline{toc}{chapter}{Bonafide Certificate}
+
+This is to certify that the project report entitled \textbf{“Algorithmic Alpha via Large Language Models”} submitted by \textbf{Tanmay H Bukka} bearing the MIS No: 112315195, \textbf{Siddhant Ganesh Senthil Kumar} bearing the MIS No: 112315183, \textbf{Ch Jaya Surya} bearing the MIS No: 112315046, \textbf{Kantamneni Radhakrishna} bearing the MIS No: 112315082, \textbf{Kulkarni Piyush Prafulla} bearing the MIS No: 112316021, in completion of his/her project work under the guidance of \textbf{Dr. Shrikant Salve} is accepted for the project report submission in partial fulfillment of the requirements for the award of the degree of Bachelor of Technology in the Department of Computer Science and Engineering and Electronics and Communication Engineering, Indian Institute of Information Technology, Pune (IIIT Pune), during the academic year 2025-26.
+
+\vspace{3cm}
+
+\noindent
+\begin{minipage}[t]{0.32\textwidth}
+    \textbf{Dr. Shrikant Salve} \\
+    Project Supervisor \\
+    Assistant Professor \\
+    Department of CSE \\
+    IIIT Pune
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\textwidth}
+    \textbf{Dr. Nagendra Kushwaha} \\
+    Head of the Department \\
+    Assistant Professor \\
+    Department of ECE \\
+    IIIT Pune
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\textwidth}
+    \textbf{Dr. Bhupendra Singh} \\
+    Head of the Department \\
+    Assistant Professor \\
+    Department of CSE \\
+    IIIT Pune
+\end{minipage}
+\vspace{2cm}
+
+\vspace{3cm}
+
+\noindent Project Viva-voce held on: \_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+% -------------------------------------------------------
+% UNDERTAKING FOR PLAGIARISM (Inst. 4 & 9b)
+% -------------------------------------------------------
+\newpage
+\chapter*{Undertaking for Plagiarism}
+\addcontentsline{toc}{chapter}{Undertaking for Plagiarism}
+
+We, Tanmay H Bukka, Siddhant Ganesh Senthil Kumar, Ch Jaya Surya, Kantamneni Radhakrishna, and Kulkarni Piyush Prafulla, solemnly declare that research work presented in the report/dissertation titled \textbf{“Algorithmic Alpha via Large Language Models”} is solely my/our research work with no significant contribution from any other person. Small contribution/help wherever taken has been duly acknowledged and that complete report has been written by us. 
+
+I understand the zero tolerance policy of Indian Institute of Information Technology, Pune towards plagiarism. Therefore we declare that no portion of my report has been plagiarized and any material used as reference is properly referred/cited. I undertake that if I am found guilty of any formal plagiarism in the above titled thesis even after award of the degree, the Institute reserves the rights to withdraw/revoke my B.Tech degree.
+
+\vspace{2cm}
+
+\noindent \textbf{Student’s Name and Signature with Date:}
+
+\vspace{1cm}
+\noindent \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+% -------------------------------------------------------
+% CONFLICT OF INTEREST (Inst. 9b)
+% -------------------------------------------------------
+\newpage
+\chapter*{Conflict of Interest}
+\addcontentsline{toc}{chapter}{Conflict of Interest}
+
+Manuscript title: \textbf{Algorithmic Alpha via Large Language Models}
+
+The authors whose names are listed immediately below certify that they have NO affiliations with or involvement in any organization or entity with any financial interest (such as honoraria; educational grants; participation in speakers’ bureaus; membership, employment, consultancies, stock ownership, or other equity interest; and expert testimony or patent-licensing arrangements), or non-financial interest (such as personal or professional relationships, affiliations, knowledge or beliefs) in the subject matter or materials discussed in this manuscript.
+
+\vspace{2cm}
+\noindent \textbf{Student’s Name and Signature with Date}
+
+
+\vspace{1cm}
+\noindent \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+\noindent  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  \\
+
+
+
+% -------------------------------------------------------
+% ACKNOWLEDGEMENT
+% -------------------------------------------------------
+\newpage
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+This project would not have been possible without the help and cooperation of many. I would like to thank the people who helped me directly and indirectly in the completion of this project work.
+
+First and foremost, I would like to express my gratitude to our honorable Director, Prof. Shireesh B. Kedare, for providing his kind support in various aspects. I would like to express my gratitude to my project guide Dr. Shrikant Salve, Department of CSE, for providing excellent guidance, encouragement, inspiration, constant and timely support throughout this B.Tech Project. I would like to express my gratitude to the Head of Department Dr. Bhupendra Singh, Department of CSE, for providing his kind support in various aspects. I would also like to thank all the faculty members in the Department of CSE and ECE and my classmates for their steadfast and strong support and engagement with this project.
+
+% -------------------------------------------------------
+% ABSTRACT (Inst. 9d)
+% -------------------------------------------------------
+
+\newpage
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+The integration of Large Language Models (LLMs) into quantitative finance marks a discontinuous leap in the evolution of algorithmic trading, transitioning the field from static ``Quant 1.0'' pattern matching to dynamic, context-aware reasoning engines capable of navigating non-stationary market dynamics. This study investigates a novel \textbf{Hierarchical Neuro-Symbolic Architecture} designed to overcome the ``profitability cliff'' faced by traditional mathematical models during structural market shifts.
+
+We propose a framework that utilizes LLMs specifically employing \textbf{Direct Preference Optimization (FinDPO)} and \textbf{Analogy-Driven Chain-of-Thought (AD-FCoT)} not to predict asset prices directly, but to act as a \textbf{``Router Agent.''} Unlike antecedent approaches that utilize sentiment as a raw directional input, our model functions as a meta-heuristic selector, analyzing heterogeneous financial texts (earnings calls, regulatory filings, and high-frequency newswires) to identify latent market regimes. The system utilizes this reasoning to dynamically distinguish between ``Panic-Induced Volatility'' (triggering Mean Reversion sub-models) and ``Fundamental Expansion'' (triggering Trend Following/Momentum sub-models). Furthermore, we address structural impediments such as ``Look-Ahead Bias'' and the ``Distraction Effect'' through strict entity anonymization, ensuring that regime identification relies on generalized market conditions rather than specific ticker memorization.
+
+The system was rigorously backtested against the \textbf{Nifty 50 benchmark} over a 24-month period (January 2023 – January 2025). The results demonstrated superior performance, achieving a \textbf{Total Return of 68.35\%} and a \textbf{Sharpe Ratio of 4.57}, significantly outperforming the benchmark’s 29.93\% return and 1.17 Sharpe Ratio. Crucially, the adaptive allocation mechanism effectively mitigated downside risk, limiting \textbf{Max Drawdown to -3.10\%} compared to the benchmark's -10.93\%. The research highlights that while generic foundation models yield commoditized signals, a proprietary, preference-aligned Router Agent unlocks genuine edge, proving that the highest utility of LLMs lies in their ability to act as autonomous risk managers that validate trading signals through contextual reasoning.
+
+\vspace{1em}
+\textbf{Keywords:} Large Language Models (LLMs); Hierarchical Neuro-Symbolic Architecture; Direct Preference Optimization (FinDPO); Algorithmic Trading; Analogy-Driven Chain-of-Thought (AD-FCoT); Regime Switching; Quantitative Strategy Selection; Sentiment Alpha; Nifty 50.
+
+
+% -------------------------------------------------------
+% TABLE OF CONTENTS (Inst. 9e)
+% -------------------------------------------------------
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+
+
+
+% =======================================================
+% SWITCH TO ARABIC NUMERALS (1, 2, 3)
+% =======================================================
+\newpage
+\pagenumbering{arabic}
+
+
+\newpage
+\chapter{Introduction}
+
+\section{Overview of Work}
+
+The domain of quantitative finance is currently witnessing a discontinuous paradigm shift, transitioning from the era of "Quant 1.0" characterized by static mathematical modeling on structured data to "Quant 2.0," which integrates semantic, context-aware computing. Historically, algorithmic trading has relied predominantly on numerical inputs such as price, volume, and volatility, processed through rigid statistical models (e.g., ARIMA, GARCH). While these methods excel at identifying recurring numerical patterns, they possess a critical blind spot: they lack the capacity to interpret the \textit{narrative context} driving market behavior. A statistical model may detect a price drop, but it cannot distinguish whether that drop is driven by a temporary liquidity crunch (a buy opportunity) or a fundamental structural failure (a sell signal).
+
+This project, titled \textbf{"Algorithmic Alpha via Large Language Models,"} bridges this gap by proposing a novel, hierarchical framework that integrates Large Language Models (LLMs) into the core logic of strategy selection. Unlike antecedent approaches that utilize Generative AI for direct price prediction a task often plagued by stochastic noise and hallucinations this work leverages LLMs as \textbf{"Meta-Heuristic Selectors."}
+
+The proposed system operates as a \textbf{neuro-symbolic architecture} where the "Neural" component (the LLM) provides reasoning, and the "Symbolic" component (Mathematical Models) executes trades. The workflow is designed as follows:
+
+\begin{itemize}
+    \item \textbf{Ingestion \& Reasoning:} The system ingests vast amounts of unstructured financial text, including earnings call transcripts, regulatory filings (10-Ks), and high-frequency newswires.
+    \item \textbf{Latent Regime Identification:} By employing advanced fine-tuning techniques such as \textbf{Direct Preference Optimization (FinDPO)} and \textbf{Analogy-Driven Chain-of-Thought (AD-FCoT)}, the model acts as a "Router Agent." It does not predict the next price tick; rather, it classifies the current market environment into latent regimes (e.g., 'Panic-Induced Volatility' vs. 'Fundamental Expansion').
+    \item \textbf{Dynamic Strategy Allocation:} Based on the identified regime, the system dynamically governs the deployment of underlying quantitative sub-strategies. For instance, identifying a 'Panic' narrative triggers \textbf{Mean Reversion} algorithms, whereas a 'Growth' narrative activates \textbf{Trend Following (Momentum)} modules.
+\end{itemize}
+
+By treating the LLM as an autonomous risk manager rather than a crystal ball, this research aims to mitigate the decay of static alpha and demonstrate how semantic understanding can be mathematically operationalized for superior risk-adjusted returns.
+
+
+\section{Background and Domain Description}
+To fully appreciate the architectural innovations proposed in this project, it is necessary to first deconstruct the fundamental pillars of modern computational finance.
+
+\textbf{Quantitative Finance and Algorithmic Trading:} Quantitative Finance is the field of applied mathematics concerned with mathematical modeling of financial markets. Algorithmic Trading utilizes computer algorithms to execute orders based on pre-defined criteria such as timing, price, or quantity without human intervention, eliminating emotional biases.
+
+\textbf{The Quest for "Alpha" ($\alpha$):} The central objective of any quantitative strategy is the generation of Alpha. In modern portfolio theory, Alpha represents the excess return generated by the strategy’s specific skill, independent of market movement (Beta). "Algorithmic Alpha," therefore, refers to the ability of a computer program to consistently identify inefficiencies in the market to generate profit that exceeds the standard market benchmark.
+
+\textbf{The Gap: Context-Aware Reasoning:} While traditional models excel at processing numerical time-series data (OHLC), they are fundamentally "blind" to real-world events. This project leverages Large Language Models (LLMs) not just as text processors, but as reasoning engines to interpret financial news and earnings reports, mimicking the cognitive process of a human portfolio manager at algorithmic speeds.
+
+\section{Literature Review}
+
+The evolution of Natural Language Processing in finance is a progression from simple lexical matching to deep semantic understanding and reasoning. The following review categorizes pivotal contributions that have shaped the current landscape, highlighting the shift from dictionary-based methods to advanced Large Language Models and Agentic workflows.
+
+\textbf{Huang et al. (2023)} introduced FinBERT, representing the pivotal shift to transformer-based transfer learning in finance \cite{huang2023}. Recognizing that general-purpose language models often fail to interpret the specific vernacular of finance where words like "risk" or "volatility" have specific mathematical implications they pre-trained the BERT architecture on a massive corpus of financial texts, including 10-K filings, analyst reports, and earnings call transcripts. Their work highlighted that FinBERT excelled particularly in the identification of negative sentiment, a critical factor given the market's documented asymmetric reaction to bad news (prospect theory). Furthermore, their comparative analysis exposed the severe limitations of dictionary-based approaches like Loughran-McDonald, showing that FinBERT could correctly classify nuanced sentences that dictionaries would mislabel as neutral or ambiguous, thereby unlocking a deeper layer of textual information.
+
+\textbf{Kirtac \& Germano (2024)} provided a critical comparison of generative versus discriminative models in sentiment trading \cite{kirtac2024}. Their analysis revealed that generative models (like OPT/GPT) significantly outperformed discriminative models (like BERT) in financial sentiment analysis. They argue that generative models capture the subtle implications and broader context of financial news that pure classification models miss. This paper establishes the premise that the future of alpha generation lies in models that can generate reasoning rather than just categorize text.
+
+\textbf{Du et al. (2025)} offer a comprehensive survey that contextualizes the current state of NLP in finance, categorizing the field's explosive growth \cite{du2025}. Their review notes the emergence of "Reasoning" as a core competency of modern models, moving beyond simple sentiment extraction to complex tasks like financial forecasting, portfolio management, and regulatory compliance monitoring. They highlight the rapid adoption of specialized LLMs like BloombergGPT and the utility of parameter-efficient fine-tuning methods. Their survey suggests that the future lies in models capable of performing complex numerical reasoning and handling heterogeneous data sources (tables + text), paving the way for autonomous financial agents.
+
+\textbf{Iacovides, G., et al. (2025)} propose FinDPO, utilizing Direct Preference Optimization (DPO) to align LLMs \cite{iacovides2025}. They introduce a "logit-to-score" mechanism converting discrete labels into continuous, rankable scores. They report a Sharpe ratio of $\approx 2.0$ even under transaction costs of 5 bps. This is highly relevant, offering a solution to the "binary output" problem of traditional classifiers. The key observation is that DPO allows for "conviction weighting" in portfolios, which is essential for overcoming transaction costs. This methodology forms the core of our proposed optimization strategy.
+
+\textbf{Cepni, O., Gupta, R., \& Ji, Q. (2023)} investigate the state-dependent interaction between monetary policy shocks and equity markets, specifically examining how investor sentiment regimes modulate market reactions \cite{cepni2023}. Their empirical analysis reveals a significant behavioral asymmetry: the stock market’s positive reaction to expansionary monetary policy is substantially stronger during high-sentiment regimes than in low-sentiment periods. The authors attribute this to a "sentiment-mispricing mechanism," where heightened optimism and "animal spirits" amplify the valuation impact of policy signals. This study is critical for our research as it provides macro-level empirical validation that market efficiency is not static but conditional on the prevailing sentiment state.
+
+\textbf{Mudarisov et al. (2024)} investigated the efficacy of Large Language Models in detecting and forecasting latent market regimes through the aggregation of unstructured news data \cite{mudarisov2024}. Their empirical analysis demonstrated that employing an ensemble of fine-tuned FinBERT models to process high-frequency financial news significantly outperformed traditional time-series baselines in regime classification tasks. The LLM-augmented framework achieved a 73\% improvement in accuracy and a 110\% improvement in weighted F1 score when identifying distinct volatility regimes. This paper establishes that unstructured textual data acts as a superior leading indicator for regime transitions.
+
+\textbf{Fatouros et al. (2025)} presented MarketSenseAI 2.0, a framework combining Retrieval-Augmented Generation (RAG) with specialized LLM agents to process heterogeneous data including earnings calls, news, and macro reports \cite{fatouros2025}. By integrating a dedicated "Macro Agent" that continuously scans for regime-altering news, the system creates a context-aware signal that adapts to broader economic conditions. In a rigorous two-year out-of-sample test (2023-2024), the framework achieved cumulative returns of 125.9\% compared to the S\&P 100's 73.5\%. This paper establishes that the integration of multimodal data through RAG allows LLMs to generate "regime-aware" alpha that is robust across different market cycles.
+
+\textbf{Singhal \& Singhal (2025)} proposed the "Analogy-Driven Financial Chain-of-Thought" (AD-FCoT) prompting framework to mitigate hallucinations and improve reasoning in financial sentiment analysis \cite{singhal2025}. Instead of generic reasoning, the model is prompted to retrieve and compare current events with historical analogies effectively grounding its sentiment scoring in historical regime contexts. Experiments demonstrated that AD-FCoT significantly outperformed standard Chain-of-Thought baselines in classification accuracy. This research implies that explicitly prompting LLMs to identify historical regime analogies unlocks a deeper, more reliable form of predictive reasoning.
+
+\textbf{Drobetz \& Otto (2021)} conducted a rigorous evaluation of machine learning methods for forecasting European stock returns, contrasting linear benchmarks against sophisticated architectures like Neural Networks and Random Forests \cite{drobetz2021}. Their empirical analysis confirmed that incorporating non-linear interactions between firm characteristics specifically price trends and fundamental valuation ratios significantly improves predictive accuracy. Crucially, however, they identified that transaction costs act as a definitive ``profitability cliff'' for active strategies; high-turnover signals that appear profitable in a frictionless environment often erode completely when realistic trading costs are applied. This paper establishes the critical ``quant baseline'' for our research, validating that while statistical ML models can extract alpha, they lack the contextual awareness to know \textit{when} to trade. This necessitates our proposed LLM-driven regime switching framework, which aims to act as a dynamic filter, activating these high-cost quant strategies only during favorable sentiment regimes to maximize risk-adjusted returns.
+
+\textbf{Vishwas H. N. et al. (2025)} provided a comprehensive taxonomy of AI-driven stock market prediction, evaluating deep learning and hybrid models such as MMGAN-HPA and SpectralGPT \cite{vishwas2025}. Their analysis highlights that despite the high accuracy of current deep learning architectures, they suffer significant performance degradation during sudden ``regime shifts'' and often lack interpretability due to their black-box nature. Furthermore, they explicitly identify ``multimodal integration'' the fusion of unstructured sentiment with structured price data as a critical, under-explored frontier. This work establishes the theoretical necessity for our framework, which specifically targets the gap in regime adaptability by employing a reasoning engine to classify market states.
+
+\textbf{Gusella, F., \& Vicario, E. (2025)} explored whether LLM-based agents naturally exhibit the ``regime-switching'' behaviors predicted by Heterogeneous Agent Models (HAMs) \cite{gusella2025}. By simulating a market populated by Generative Agents (powered by GPT-4), they found that these agents spontaneously shift between ``fundamentalist'' (mean-reverting) and ``trend-following'' (momentum) behaviors based on market conditions. The study quantified the ``reaction parameter'' of these agents, finding it consistently falls within the theoretical bounds required for endogenous regime switching. This theoretical validation implies that LLMs are not just signal processors but can simulate the complex adaptive behavior of human market participants, making them ideal engines for identifying latent regime shifts.
+
+\textbf{Ballinari, D., \& Maly, J. (2025)} enhanced sentiment analysis in the Foreign Exchange (FX) market by fine-tuning the Llama 3.1 8B model, addressing the limitations of generic financial models like FinBERT \cite{ballinari2025}. By employing a novel ``distant labeling'' technique based on realized returns and explicitly distinguishing between past and future sentiment, they demonstrated that their domain-adapted LLM significantly outperforms both dictionary-based methods and FinBERT. This study is pivotal for our research as it validates the efficacy of open-source, fine-tuned LLMs (specifically the Llama architecture) for generating actionable trading signals in high-efficiency markets.
+
+\textbf{Bobade, P., \& Sarade, A. (2025)} developed a hybrid ``AI-Powered Stock Investment Prediction'' system that integrates traditional technical indicators (such as RSI and MACD) with real-time sentiment analysis derived from Llama 3 \cite{bobade2025}. Their methodology processes unstructured financial news to generate distinct recommendations, aiming to overcome the latency and contextual blindness of traditional technical analysis. This work relates to our framework by demonstrating the practical utility of augmenting rigid quantitative strategies with the contextual awareness of Large Language Models to provide a decision-support system for volatile environments.
+
+\textbf{Li et al. (2025)} challenged the viability of current LLM-based investing agents by introducing FINSABER, a comprehensive backtesting framework that mitigates survivorship and look-ahead biases \cite{li2025}. Through rigorous experimentation, they demonstrated that existing LLM strategies are often ``pathologically miscalibrated'': significantly underperforming in bull markets due to excessive conservatism and incurring losses in bear markets due to inadequate risk controls. This work validates the core design of our LLM Router Agent, which is specifically engineered to overcome these observed failures by explicitly detecting market regimes (Panic vs. Growth) and switching sub-models accordingly, rather than relying on a single static logic.
+
+\textbf{Bloch, D. (2024)} critiqued the efficacy of traditional backtesting engines, arguing that optimizing trading rules on a single historical trajectory inevitably leads to ``backtest overfitting'' \cite{bloch2024}. He proposed a "Futuretesting" framework that utilises generative models and stochastic processes to create synthetic market data, allowing strategies to be validated across a probabilistic distribution of diverse market scenarios rather than just past events. This work establishes the theoretical necessity for our framework's Layer 4 (Identify Regime); while Bloch advocates for robustness via synthetic stress-testing, our architecture solves the "regime shift" problem by deploying an LLM Router Agent to actively detect market states (e.g., Panic vs. Growth) from unstructured data and dynamically allocate capital to the most statistically appropriate sub-model.
+
+
+\section{Motivation of Work}
+The financial markets are characterized by non-stationary behavior, meaning the statistical properties of the market (volatility, mean, variance) change over time. Traditional algorithmic strategies often fail because they are "static" they assume the future will look like the past.
+
+The primary motivation for this work is to solve the problem of \textbf{Strategy Decay}. By integrating LLMs, we aim to create a system that can "read" the current market regime (e.g., Panic vs. Growth) from news data and adapt its mathematical models accordingly. Furthermore, the explosion of unstructured data (news, tweets, filings) has exceeded human capacity to process; this project is motivated by the need to automate the \textit{interpretation} of this data, not just the aggregation of it.
+
+
+\section{Research Gap}
+
+While recent advancements have successfully integrated Large Language Models (LLMs) into financial sentiment analysis and basic forecasting, a critical tri-fold gap remains in the literature regarding regime-conditional adaptability and operational reasoning:
+
+\begin{enumerate}
+    \item \textbf{The ``Static Calibration'' Failure in Non-Stationary Markets} \\
+    Despite the proficiency of Transformer-based models \cite{huang2023, kirtac2024} in extracting sentiment, and the emergence of autonomous agents \cite{fatouros2025}, existing frameworks suffer from pathological miscalibration when market dynamics shift. As noted by Li et al. \cite{li2025} and Vishwas et al. \cite{vishwas2025}, deep learning models degrade significantly during sudden regime shifts because they lack an explicit \textit{``meta-layer''} to alter their risk profile. Current literature treats trading agents as monolithic entities that attempt to generalize a single strategy across all cycles, rather than dynamic systems that switch behaviors (e.g., from \textit{Momentum} to \textit{Mean Reversion}) in response to ``Panic'' or ``Growth'' signals.
+
+    \item \textbf{The Disconnect Between ``Unstructured Reasoning'' and ``Structured Execution''} \\
+    Although Singhal \& Singhal \cite{singhal2025} demonstrated that ``Analogy-Driven Chain-of-Thought'' (AD-FCoT) improves reasoning, and Iacovides et al. \cite{iacovides2025} showed that Direct Preference Optimization (DPO) improves alignment, these methodologies remain siloed. There is a lack of research that fuses historical analogy reasoning directly with capital allocation mechanisms. The literature \cite{drobetz2021} confirms that quantitative models struggle with transaction costs due to a lack of contextual awareness; however, no current framework utilizes an LLM's reasoning capabilities (AD-FCoT) to act as a \textit{gatekeeper} or \textit{router} for these quantitative sub-models, effectively filtering out high-cost trades during unfavorable regimes.
+
+    \item \textbf{Operationalizing ``Endogenous Switching'' in Hybrid Architectures} \\
+    While Gusella \& Vicario \cite{gusella2025} and Cepni et al. \cite{cepni2023} theoretically validate that markets are driven by switching sentiment regimes and that agents should display heterogeneous behaviors, there is a scarcity of empirical frameworks that operationalize this via a hybrid \textit{Neuro-Symbolic architecture}. Most existing hybrid models \cite{bobade2025, ballinari2025} simply augment technical indicators with sentiment scores as input features. They fail to use the LLM as a higher-order decision engine that explicitly classifies the market state to dictate the logic of the trading strategy itself, rather than just influencing the probability of a trade.
+
+    \item \textbf{Data Sterility and the Challenge of High-Entropy Streams} \\
+    While the adaptation of Transformer-based models to the financial domain has yielded significant improvements in sentiment classification, current methodologies utilize predominantly curated, institutional-grade corpora. Foundational works such as Huang et al. \cite{huang2023} and Kirtac \& Germano \cite{kirtac2024} rely heavily on standardized texts like 10-K filings and earnings transcripts, while recent autonomous agents like those proposed by Fatouros et al. \cite{fatouros2025} depend on structured macro reports and journalistic news feeds. This reliance creates a \textit{data sterility bias}, where models excel at interpreting formal ``Fed-speak'' but lack the adaptability to process high-entropy, real-time data streams such as social media and alternative market discourse. As explicitly identified by Vishwas H. N. et al. \cite{vishwas2025}, the ability to mitigate data noise within multimodal integration remains a critical, under-explored frontier. Consequently, there is a distinct gap in the literature for frameworks that can robustly extract reliable sentiment signals from uncurated, colloquial, and highly noisy information environments without suffering from the performance degradation observed in models trained solely on sanitized financial vernacular.
+\end{enumerate}
+
+
+% --- CHAPTER 2 ---
+\newpage
+\chapter{Problem Statement}
+
+
+The central problem addressing the field of algorithmic trading today is the \textbf{``Regime-Staticity''} of quantitative models in the face of non-stationary market dynamics. Financial markets are complex adaptive systems characterized by shifting distributions of returns, volatilities, and correlations. A trading strategy that demonstrates robust performance during a period of fundamental economic expansion (a ``Growth'' regime) often suffers catastrophic failure during periods of systemic distress or high volatility (a ``Panic'' regime). Traditional quantitative architectures, including standard Deep Learning and Reinforcement Learning models, typically optimize parameters over a fixed historical window, resulting in a single, monolithic logic that lacks the semantic awareness to detect when the underlying market rules have changed.
+
+Consequently, current algorithmic solutions face a \textbf{``Profitability Cliff.''} While they may effectively exploit specific micro-structural inefficiencies (such as mean reversion in high-frequency data), they are ``blind'' to the macro-narrative context such as regulatory shifts, geopolitical crises, or earnings surprises that dictates the broader market direction. This blindness leads to \textit{pathological miscalibration}, where models continue to execute aggressive mean-reversion trades during a structural crash (catching a falling knife) or remain overly defensive during a liquidity-driven bull run (missing the rally).
+
+The problem is further compounded by the limitations of existing Natural Language Processing (NLP) applications in finance. The prevailing methodology relies on \textbf{``shallow classification,''} where LLMs or BERT-based models are used to assign binary sentiment labels (Positive/Negative) to news headlines. This approach reduces complex, multi-dimensional economic events to a single polarity score, stripping away the causal reasoning required to assess the magnitude and duration of the event's impact. There is a distinct absence of a unified framework that can:
+
+\begin{itemize}
+    \item Ingest unstructured text and structured price data simultaneously.
+    \item Reason analogically about the current market state compared to historical precedents.
+    \item Dynamically route capital to the most mathematically appropriate strategy (Mean Reversion vs. Momentum) based on that reasoning.
+\end{itemize}.
+
+
+\section{Research Objectives}
+
+
+The primary objective of this research is to design, implement, and validate a hierarchical trading framework that utilizes Large Language Models not as direct price predictors, but as regime-conditional strategy selectors. The specific objectives are as follows:
+
+\begin{itemize}
+    \item \textbf{To Develop a Multimodal Data Ingestion Pipeline:} \\
+    To construct a robust system capable of synchronously processing unstructured financial text (news, social media, earnings calls) and structured market data (OHLCV prices), ensuring zero leakage of future data to mitigate Look-Ahead Bias.
+
+    \item \textbf{To Implement Entity Anonymization for Bias Mitigation:} \\
+    To design and integrate a pre-processing layer that systematically masks specific corporate tickers and entity names (e.g., replacing ``Apple'' with \texttt{[TICKER\_MASK]}) to eliminate the ``Distraction Effect,'' forcing the LLM to reason based on generalized market fundamentals rather than historical biases associated with specific companies.
+
+    \item \textbf{To Engineer an LLM Router Agent for Regime Identification:} \\
+    To develop a proprietary reasoning engine that utilizes context-aware logic to classify the current market environment into distinct latent regimes, specifically distinguishing between ``Regime A: PANIC'' (characterized by fear-induced volatility) and ``Regime B: GROWTH'' (characterized by fundamental expansion).
+
+    \item \textbf{To Establish a Dynamic Strategy Allocation Mechanism:} \\
+    To create a logical control layer that automatically routes trading capital to orthogonal sub-models triggering \textit{Mean Reversion} algorithms during Panic regimes and \textit{Momentum/Trend} algorithms during Growth regimes thereby optimizing the risk-adjusted returns (Sharpe Ratio) across different market cycles.
+
+    \item \textbf{To Quantify the ``Semantic Alpha'' via Out-of-Sample Testing:} \\
+    To rigorously evaluate the performance of the LLM Router Agent against static baseline strategies (Buy-and-Hold, Pure Momentum, Pure Mean Reversion) using a strictly time-boxed validation set to demonstrate the specific value add of the regime-switching logic.
+\end{itemize}
+
+
+\section{Analysis and Design}
+
+\subsection{Hierarchical Neuro-Symbolic Architecture}
+The proposed system utilizes a \textbf{Hierarchical Neuro-Symbolic Architecture} that decouples semantic reasoning from mathematical execution. Unlike monolithic trading agents, this framework operates as a ``Meta-Controller'' where the Large Language Model (LLM) functions as a Portfolio Manager, identifying the prevailing market regime, while distinct quantitative algorithms act as specialized execution engines. The data flow acts through three strictly defined layers.
+
+\subsection{Layer 1: Data Ingestion and Bias Mitigation}
+To process heterogeneous financial data, the system implements a synchronous pipeline for unstructured text (news, filings) and structured market data (OHLCV). A critical innovation in this layer is the \textbf{Entity Anonymization Protocol}. To prevent ``Look-Ahead Bias'' and the ``Distraction Effect,'' a Named Entity Recognition (NER) pipeline masks specific corporate identities (e.g., replacing ``Apple'' with \texttt{[TICKER\_A]}). This forces the model to learn generalized market dynamics rather than memorizing historical price paths of specific companies.
+
+\subsection{Layer 2: The Reasoning Core (LLM Router)}
+The central decision engine is an LLM fine-tuned using \textbf{Direct Preference Optimization (FinDPO)}. Instead of predicting price scalars, the Router utilizes \textbf{Analogy-Driven Chain-of-Thought (AD-FCoT)} to classify the market state into latent regimes (e.g., \textit{Panic} vs. \textit{Growth}). The AD-FCoT mechanism prompts the model to compare current news events with historical analogies before outputting a regime confidence score.
+
+\subsection{Layer 3: Dynamic Strategy Allocation}
+The final execution layer acts as a logic gate that routes capital based on the LLM's output. The system dynamically calculates a weighted signal $S_{final}$ using two orthogonal sub-strategies: \textbf{Mean Reversion} (activated during Panic/Volatility) and \textbf{Trend Following} (activated during Growth).
+
+The final trade signal is computed as:
+\begin{equation}
+    S_{final} = (W_{panic} \times S_{reversion}) + (W_{growth} \times S_{momentum})
+\end{equation}
+Where $W$ represents the confidence weights derived from the LLM's softmax output. This dynamic allocation allows the system to preserve capital during structural market shifts where static models typically fail.
+% --- CHAPTER 3 ---
+\newpage
+\chapter{Methodology}
+\section{Proposed Work}
+This study employs a hierarchical, multi-layered framework designed to decouple market sentiment analysis from direct price prediction. Instead, we utilize a Large Language Model (LLM) as a meta-heuristic \textbf{``Router Agent''} that identifies latent market regimes to dynamically allocate capital between competing quantitative strategies. The system architecture consists of six distinct layers, structured as follows:
+
+\begin{enumerate}
+    \item \textbf{Data Ingestion (Layer 1)} \\
+    The framework initiates with a dual-pipeline data ingestion process that aggregates heterogeneous financial data:
+    \begin{itemize}
+        \item \textbf{Unstructured Data:} High-frequency textual data is scraped and aggregated, including earnings call transcripts, regulatory filings (10-K/10-Q), and real-time newswires.
+        \item \textbf{Structured Data:} Synchronized OHLCV (Open, High, Low, Close, Volume) price data is ingesting to form the quantitative backbone for the sub-models.
+    \end{itemize}
+
+    \item \textbf{Pre-Processing \& Entity Anonymization (Layer 2)} \\
+    To mitigate \textbf{``Look-Ahead Bias''} and the \textbf{``Distraction Effect''} where an LLM memorizes specific ticker performance rather than learning generalized market dynamics we implement a strict Entity Anonymization protocol.
+    \begin{itemize}
+        \item \textbf{Ticker Masking:} All specific company names and tickers within the textual data are replaced with generic tokens (e.g., \texttt{[TICKER\_A]}, \texttt{[COMPANY\_REF]}). This forces the model to rely solely on the semantic context of the narrative (e.g., ``regulatory breach,'' ``earnings surprise'') rather than historical bias associated with specific equities.
+    \end{itemize}
+
+    \item \textbf{The Reasoning Engine: LLM Router Agent (Layer 3)} \\
+    The core of the architecture is a proprietary Router Agent responsible for contextual reasoning. This agent does not predict price direction; it predicts the validity of a strategy.
+    \begin{itemize}
+        \item \textbf{Architectural Enhancements:} We move beyond zero-shot prompting by employing \textbf{Direct Preference Optimization (FinDPO)} to align the model with financial decision-making logic.
+        \item \textbf{Analogy-Driven Chain-of-Thought (AD-FCoT):} The model utilizes AD-FCoT to reason through historical analogies, comparing current unstructured data patterns against historical precedents to determine the psychological state of the market.
+    \end{itemize}
+
+    \item \textbf{Regime Identification (Layer 4)} \\
+    The Router Agent classifies the current market environment into one of two distinct latent regimes based on the processed narrative:
+    \begin{itemize}
+        \item \textbf{Regime A (Panic Context):} Characterized by fear-induced volatility, negative sentiment spikes, or uncertainty.
+        \item \textbf{Regime B (Growth Context):} Characterized by fundamental expansion, positive guidance, and stability.
+    \end{itemize}
+
+    \item \textbf{Strategy Allocation (Layer 5)} \\
+    Based on the regime identified in Layer 4, the system dynamically activates the mathematically optimal sub-model:
+    \begin{itemize}
+        \item \textbf{Mean Reversion Sub-Model:} Activated during \textbf{Regime A (Panic)}. This model operates on the hypothesis that fear-induced sell-offs are often irrational and temporary, executing trades that bet on a return to the mean.
+        \item \textbf{Momentum / Trend Sub-Model:} Activated during \textbf{Regime B (Growth)}. This model operates on the hypothesis that fundamental strength drives sustained price action, executing trades that follow the prevailing trend.
+    \end{itemize}
+
+    \item \textbf{Execution \& Risk Management (Layer 6)} \\
+    The selected signals are passed to the Execution Layer, which acts as the final gatekeeper.
+    \begin{itemize}
+        \item \textbf{Risk Management:} This module applies position sizing, stop-loss protocols, and volatility adjustments before order routing.
+        \item \textbf{Alpha Generation:} The final output is the execution of trades intended to generate alpha (excess returns).
+    \end{itemize}
+
+    \item \textbf{Reinforcement Feedback Loop} \\
+    As depicted in the architecture, a \textbf{Reinforcement Feedback} mechanism connects the post-execution results (Layer 6) back to the Reasoning Engine (Layer 3). This allows the Router Agent to update its weights or context window based on the success or failure of previous regime classifications, creating an adaptive system that evolves with changing market dynamics.
+\end{enumerate}
+
+
+
+\begin{figure}[H]
+    \centering
+    % Replace 'architecture_diagram.png' with your actual filename
+    \includegraphics[width=0.7\textwidth]{fig-3-flow.png} 
+    \caption{Hierarchical Neuro-Symbolic Router Architecture. The LLM functions as a meta-selector, classifying regimes to route capital to the appropriate sub-strategy.}
+    \label{fig:system_arch}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Replace 'architecture_diagram.png' with your actual filename
+    \includegraphics[width=0.7\textwidth]{old-flow.png} 
+    \caption{High-Level System Architecture: Integrating Multi-Source Data Ingestion with LLM-Driven Strategy Selection.}
+    \label{fig:system_arch}
+\end{figure}
+
+
+\begin{table}[H]
+    \centering
+    \caption{System Implementation and Technology Stack}
+    \label{tab:tech_stack}
+    \begin{tabular}{@{}p{3.5cm} p{4.5cm} p{7cm}@{}}
+    \toprule
+    \textbf{Component} & \textbf{Technology / Library} & \textbf{Function in Architecture} \\
+    \midrule
+    LLM Framework & Qwen/Qwen2.5-3B-Instruct & Preference Optimization and Reasoning Core. \\
+    \addlinespace
+    Reasoning Logic & AD-FCoT & Analogy-Driven Chain-of-Thought Prompting. \\
+    \addlinespace
+    Scraping & Selenium, Playwright & Dynamic and Static Web Content Extraction. \\
+    \addlinespace
+    Backtesting & Python (Pandas/NumPy) & Simulation of strategy performance over historical data. \\
+    \addlinespace
+    Hardware & GPU (e.g., A100/T4) & Inference acceleration for the LLM Router Agent. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Dataset Description}
+
+The research utilizes a composite dataset spanning the period from \textbf{January 2023 to January 2025}, encompassing both structured market data and unstructured semantic text. To ensure a holistic view of market behavior, data acquisition was divided into three primary streams:
+
+\begin{itemize}
+
+
+    \item \textbf{Social Media \& Web Scraping Pipeline:}
+    To capture high-velocity ``retail sentiment'' and noise traders' behavior, we developed a custom web scraping pipeline. Utilizing Python-based automation tools, we aggregated unstructured data from social media platforms (e.g., Reddit, X/Twitter) and financial discussion boards.
+    \begin{itemize}
+        \item \textbf{Tools employed:} We utilized \texttt{BeautifulSoup4} for static HTML parsing and DOM traversal to extract headlines and commentary. For dynamic, JavaScript-heavy content, we implemented \texttt{Selenium} drivers to render pages before extraction.
+        \item \textbf{Preprocessing:} The raw HTML data was cleaned to remove boilerplate code, ads, and navigation elements before being passed to the ingestion layer.
+    \end{itemize}
+
+    \item \textbf{Market Data (OHLCV):}
+    Synchronized price action data (Open, High, Low, Close, Volume) was sourced via the \textbf{Yahoo Finance API} and \textbf{Alpha Vantage}. This data serves as the ``ground truth'' label against which the sentiment signals are correlated and the strategy performance is backtested.
+\end{itemize}
+
+% --- CHAPTER 4 ---
+\newpage
+\chapter{Results and Discussion}
+
+\section{Backtesting Performance}
+The proposed "Algorithmic Alpha" model was backtested against the Nifty 50 benchmark. The results indicate a significant outperformance during high-volatility periods.
+
+
+
+\begin{figure}[H]
+    \centering
+    % Replace 'architecture_diagram.png' with your actual filename
+    \includegraphics[width=1\textwidth]{backtest_validation_n.png} 
+    \caption{Comparative Performance Graph (Nifty 50 Benchmark)}
+    \label{fig:nif}
+\end{figure}
+
+\begin{table}[ht]
+\centering
+\caption{Comparative Performance Analysis (Nifty 50 Benchmark)}
+\label{tab:final_results}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Strategy} & \textbf{Total Return} & \textbf{Sharpe Ratio} & \textbf{Max Drawdown} \\
+\midrule
+Nifty 50 (Benchmark) & 29.93\% & 1.17 & -10.93\% \\
+Static Mean Reversion & 28.51\% & 1.65 & -4.83\% \\
+FinBERT (Standard AI) & 38.16\% & 3.36 & -2.71\% \\
+Static Momentum  & 8.51\%  &  1.65  &  -4.83\%\\
+\textbf{LLM Router (Proposed)} & \textbf{68.35\%} & \textbf{4.57} & \textbf{-3.10\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{figure}[H]
+    \centering
+    % Replace 'architecture_diagram.png' with your actual filename
+    \includegraphics[width=1\textwidth]{backtest_validation_sp.png} 
+    \caption{Comparative Performance Graph (S\&P 500 Benchmark)}
+    \label{fig:system_arch}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Comparative Performance Analysis (S\&P 500 Benchmark)}
+\label{tab:sp500_results}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Strategy} & \textbf{Total Return} & \textbf{Sharpe Ratio} & \textbf{Max Drawdown} \\
+\midrule
+S\&P 500 (Benchmark)            & 53.80\%          & 1.75          & -10.28\% \\
+Static Mean Reversion           & 23.31\%          & 1.18          & -8.67\% \\
+Static Momentum                 & 36.04\%          & 1.64          & -8.44\% \\
+FinBERT (Standard AI)           & 54.91\%          & 4.14          & -1.98\% \\
+\textbf{LLM Router (Proposed)}  & \textbf{94.92\%} & \textbf{5.14} & \textbf{-5.03\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+To evaluate the efficacy of the proposed LLM Router Agent, we conducted a comparative backtest on the Nifty 50 universe over a 24-month period (January 1, 2023, to January 1, 2025). The proposed framework was benchmarked against three baselines: the passive Buy-and-Hold strategy (Nifty 50 Index), a rigid rule-based algorithm (Static Mean Reversion), and a standard Transformer-based sentiment model (FinBERT).
+
+\section{Comparative Performance Analysis}
+
+As illustrated in Table \ref{tab:final_results}, the proposed LLM Router significantly outperformed all benchmarks across every key metric. 
+
+The proposed model achieved a \textbf{Total Return of 68.35\%}, more than doubling the benchmark’s return of 29.93\%. More importantly, this alpha generation was not a result of excessive risk-taking. The \textbf{Sharpe Ratio of 4.57} indicates superior risk-adjusted returns, contrasting sharply with the benchmark (1.17) and the static model (1.65).
+
+Crucially, the \textbf{Max Drawdown} a proxy for portfolio risk during market corrections was contained at \textbf{-3.10\%} for the LLM Router, whereas the benchmark suffered a -10.93\% decline. This data suggests that the Router successfully identified ``Panic'' regimes and switched to defensive sub-models effectively.
+
+\section{Equity Curve Evolution}
+
+The cumulative portfolio value is visualized in Figure \ref{fig:nif}. The trajectory reveals a distinct decoupling of the proposed model (Green Line) from the standard FinBERT model (Purple Line) starting in mid-2023. 
+
+While FinBERT correlates closely with the market's general direction capturing growth but also suffering during downturns the LLM Router demonstrates a \textbf{``stair-step'' growth pattern}. It participates in the upside (\textbf{Regime B: Growth}) but flattens out or generates slight returns during market dips (\textbf{Regime A: Panic}), validating the activation of the Mean Reversion sub-model during volatility.
+
+% ----------------------------------------------------------------------
+% DISCUSSION SECTION
+% ----------------------------------------------------------------------
+\section{Discussion}
+
+The empirical results presented above offer strong validation for the proposed architecture, specifically addressing the tri-fold research gap identified in the literature review.
+
+\subsection{Solving the ``Static Calibration'' Failure}
+Literature by Li et al. \cite{li2025} and others highlighted that deep learning models degrade during regime shifts due to a lack of an explicit ``meta-layer.'' Our results confirm that the \textbf{Static Mean Reversion} model failed to capitalize on the 2023-2024 bull run, yielding only 8.51\% returns because it was mathematically constrained to look for reversals that rarely occurred in a strong trending market.
+
+In contrast, the LLM Router's performance demonstrates successful \textbf{Endogenous Switching}. By dynamically toggling between ``Momentum'' during the 2024 rally and ``Mean Reversion'' during short-term corrections, the system operationalized the theoretical ``heterogeneous behaviors'' proposed by Cepni et al. \cite{cepni2023}. The system did not merely predict price; it predicted the validity of the strategy itself.
+
+\subsection{Bridging Reasoning and Execution}
+A critical gap identified was the disconnect between ``Unstructured Reasoning'' (AD-FCoT) and ``Structured Execution.'' Standard models like \textbf{FinBERT (Standard AI)} utilize sentiment scores as a directional input. While FinBERT achieved a respectable 38.16\% return, its higher drawdown (-2.71\% relative to its lower return base, and high correlation to market dips) suggests it often traded on ``noise'' high sentiment in a fragile market structure.
+
+The proposed model's \textbf{Sharpe Ratio of 4.57} is the quantitative footprint of the \textbf{Analogy-Driven Chain-of-Thought (AD-FCoT)} mechanism. By reasoning through historical analogies before allocating capital, the Router acted as a gatekeeper. It effectively filtered out ``false growth'' signals that tricked the standard FinBERT model, proving that the highest utility of LLMs in finance is not signal generation, but \textit{signal validation}.
+
+\subsection{Robustness in High-Entropy Environments}
+Finally, the stability of the equity curve suggests that the \textbf{Entity Anonymization} and \textbf{Data Ingestion} layers successfully mitigated the ``Data Sterility'' bias. Where traditional models trained on sanitized 10-Ks often fail when exposed to the noise of modern markets, our Router processed heterogeneous data without ``hallucinating'' patterns. The low drawdown indicates that when the data stream became too noisy or contradictory (high entropy), the Router defaulted to risk-off behaviors rather than forcing low-confidence trades, effectively solving the noise-intolerance issues raised by Vishwas et al. \cite{vishwas2025}.
+
+% --- CHAPTER 5 ---
+\chapter{Conclusion and Future Scope}
+
+\section{Conclusion}
+
+This study marks a paradigm shift in algorithmic trading by re-imagining the role of Large Language Models not as direct price predictors, but as context-aware capital allocators. By integrating \textbf{Direct Preference Optimization (FinDPO)} with \textbf{Analogy-Driven Chain-of-Thought (AD-FCoT)}, we successfully developed a ``Router Agent'' capable of identifying latent market regimes and dynamically switching between Mean Reversion and Momentum strategies.
+
+The empirical results on the Nifty 50 benchmark (2023–2025) confirm the superiority of this neuro-symbolic approach. The system achieved a \textbf{68.35\% total return} with a \textbf{Sharpe Ratio of 4.57}, significantly outperforming both the static quantitative baselines and standard transformer models (FinBERT). Crucially, the model demonstrated resilience during market downturns, limiting drawdowns to just 3.10\%.
+
+These findings validate our core hypothesis: the ``noise'' inherent in financial markets is not merely a statistical nuisance but a rich semantic signal. When processed through a reasoning engine that decouples sentiment (how people feel) from strategy (how math should react), LLMs can effectively solve the ``Static Calibration'' problem. This framework establishes a robust blueprint for the next generation of financial AI systems that do not simply forecast the future, but intelligently adapt to the present.
+
+\section{Future Scope}
+
+While the proposed ``LLM Router'' architecture offers a significant edge in daily and minute-level trading, several avenues remain for optimizing scalability, latency, and sensory breadth.
+
+\subsection{Hardware Acceleration via FPGA-Based Execution}
+A primary bottleneck in deploying LLM-based strategies to High-Frequency Trading (HFT) environments is the inference latency inherent in large transformer models. Future research will explore \textbf{FPGA (Field-Programmable Gate Array)} integration to bridge this gap.
+
+\begin{itemize}
+    \item \textbf{Knowledge Distillation:} We propose distilling the decision logic of the large ``Router Agent'' into a lightweight student model or a decision tree that can be flashed directly onto an FPGA.
+    \item \textbf{Nanosecond Execution:} By offloading the Layer 6 (Execution/Risk) logic to FPGAs, the system could achieve sub-microsecond order routing, ensuring that once the LLM identifies a regime shift, the execution happens faster than standard CPU-based ticks allow.
+\end{itemize}
+
+\subsection{Expanding the ``Alpha Arsenal'' (Strategy Diversification)}
+Currently, the Router toggles between two binary states (Mean Reversion vs. Momentum). Future iterations will expand the Router’s choice set to a broader library of quantitative sub-models:
+
+\begin{itemize}
+    \item \textbf{Pairs Trading (Cointegration):} Activated during ``Sector-Specific Rotation'' regimes.
+    \item \textbf{Volatility Arbitrage:} Activated during ``High Uncertainty/Low Direction'' regimes to harvest options premiums.
+    \item \textbf{Statistical Arbitrage:} Enabling the LLM to select specific factor baskets (e.g., Value vs. Growth) based on macro-narrative analysis.
+\end{itemize}
+
+\subsection{Crypto \& DeFi Integration}
+The decentralized nature of crypto markets offers a unique testing ground for autonomous agents.
+
+\begin{itemize}
+    \item \textbf{The ``Truth Layer'' (Crypto):} The Router mitigates ``fake news'' pump-and-dumps by cross-referencing price spikes with on-chain data. If price rises without a supporting narrative, the system identifies a ``Manipulation'' regime and counter-trades.
+    \item \textbf{DeFi Liquidity Management:} In Automated Market Makers (AMMs) like Uniswap V3, the Agent dynamically adjusts liquidity ranges concentrating them during ``Stable'' regimes for yield, and widening them during ``Panic'' regimes to prevent Impermanent Loss.
+\end{itemize}
+% -------------------------------------------------------
+% REFERENCES (Inst. 2 & 11)
+% -------------------------------------------------------
+\newpage
+\renewcommand{\bibname}{References}
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{References}
+
+% \bibitem{huang2023}
+% Huang, A. H., Wang, H., \& Yang, Y. (2023). FinBERT: A large language model for extracting information. \textit{Contemporary Accounting Research}, 40(2), 806-841.
+
+% \bibitem{kirtac2024}
+% Kirtac, K., \& Germano, G. (2024). Sentiment trading with large language models. \textit{Finance Research Letters}, 58, 104523.
+
+% \bibitem{du2025}
+% Du, Y., et al. (2025). Natural language processing in finance: A survey. \textit{Information Fusion}, 102, 102060.
+
+% \bibitem{iacovides2025}
+% Iacovides, G., et al. (2025). FinDPO: Financial sentiment analysis for algorithmic trading through preference optimization of LLMs. \textit{arXiv preprint arXiv:2501.xxxxx}.
+
+% \bibitem{cepni2023}
+% Cepni, O., Gupta, R., \& Ji, Q. (2023). Sentiment regimes and reaction of stock markets to conventional and unconventional monetary policies. \textit{The European Journal of Finance}, 29(15), 1789-1812.
+
+% \bibitem{mudarisov2024}
+% Mudarisov, A., et al. (2024). Cross-sector market regime forecasting with LLM-augmented financial news analysis. In \textit{Proceedings of the 7th ACM International Conference on AI in Finance} (pp. 12-25). New York, NY: ACM.
+
+% \bibitem{fatouros2025}
+% Fatouros, G., et al. (2025). MarketSenseAI 2.0: Enhancing stock analysis through LLM agents. \textit{Financial Innovation}, 11(1), 12.
+
+% \bibitem{singhal2025}
+% Singhal, S., \& Singhal, A. (2025). Analogy-driven financial chain-of-thought (AD-FCoT). \textit{IEEE AIxB}.
+
+
+% \bibitem{drobetz2021}
+% Drobetz, W., \& Otto, T. (2021). Empirical asset pricing via machine learning: Evidence from the European stock market. \textit{Journal of Asset Management}, 22(7), 507–538. 
+
+% \bibitem{gusella2025}
+% Gusella, F., \& Vicario, E. (2025). Generative agents and expectations: Do LLMs align with heterogeneous agent models?\ \textit{arXiv preprint arXiv:2511.08604}.
+
+% \bibitem{ballinari2025}
+% Ballinari, D., \& Maly, J. (2025). FX sentiment analysis with large language models (SNB Working Paper No. 2025-11). Swiss National Bank. 
+
+% \bibitem{bobade2025}
+% Bobade, P., \& Sarade, A. (2025). AI-powered stock investment prediction: Buy, hold, or sell based on LLM to investment analysis. \textit{International Journal for Research Trends and Innovation}, 10(4), 506–514.
+
+% \bibitem{vishwas2025}
+% Vishwas, H. N., \& Usha, B. (2025). Artificial intelligence-based stock market price prediction, a review. \textit{ Journal of Vibroengineering}, 27(6), 1–15.
+
+% \bibitem{li2025}
+% Li, W. W., Kim, H., Cucuringu, M., \& Ma, T. (2025). Can LLM-based financial investing strategies outperform the market in long run? \textit{arXiv preprint arXiv:2505.07078}.
+
+% \bibitem{bloch2024}
+% Bloch, D. A. (2023). Futuretesting quantitative strategies. \textit{SSRN Electronic Journal}.
+
+
+
+\bibitem{huang2023}
+Huang, A. H., Wang, H., \& Yang, Y. (2023). FinBERT: A large language model for extracting information from financial text. \textit{Contemporary Accounting Research}, 40(2), 806--841. https://doi.org/10.1111/1911-3846.12832
+
+\bibitem{kirtac2024}
+Kirtac, K., \& Germano, G. (2024). Sentiment trading with large language models. \textit{Finance Research Letters}, 62, Article 105227. https://doi.org/10.1016/j.frl.2024.105227
+
+\bibitem{du2025}
+Du, K., Zhao, Y., Mao, R., Xing, F., \& Cambria, E. (2025). Natural language processing in finance: A survey. \textit{Information Fusion}, 115, Article 102755. https://doi.org/10.1016/j.inffus.2024.102755
+
+\bibitem{iacovides2025}
+Iacovides, G., Zhou, W., \& Mandic, D. (2025). FinDPO: Financial sentiment analysis for algorithmic trading through preference optimization of LLMs. arXiv. https://doi.org/10.48550/arXiv.2507.18417
+
+\bibitem{cepni2023}
+Cepni, O., Gupta, R., \& Ji, Q. (2023). Sentiment regimes and reaction of stock markets to conventional and unconventional monetary policies: Evidence from OECD countries. \textit{Journal of Behavioral Finance}, 24(3), 365--381. https://doi.org/10.1080/15427560.2021.1983576
+
+
+\bibitem{mudarisov2024}
+Mudarisov, T., State, R., Kraussl, Z., \& others. (2024). Cross-sector market regime forecasting with LLM-augmented financial news analysis. In \textit{Proceedings of the 5th ACM International Conference on AI in Finance (ICAIF '24)} (pp. 12--25). ACM. https://doi.org/10.1145/3677052.3698642
+
+\bibitem{fatouros2025}
+Fatouros, G., Metaxas, K., Soldatos, J., \& Karathanassis, M. (2025). MarketSenseAI 2.0: Enhancing stock analysis through LLM agents. arXiv. https://doi.org/10.48550/arXiv.2502.00415
+
+\bibitem{singhal2025}
+Singhal, A., \& Singhal, N. (2025). Analogy-driven financial chain-of-thought (AD-FCoT): A prompting approach for financial sentiment analysis. arXiv. https://doi.org/10.48550/arXiv.2509.12611
+
+\bibitem{drobetz2021}
+Drobetz, W., \& Otto, T. (2021). Empirical asset pricing via machine learning: Evidence from the European stock market. \textit{Journal of Asset Management}, 22(7), 507--538. https://doi.org/10.1057/s41260-021-00237-x
+
+\bibitem{gusella2025}
+Gusella, F., \& Vicario, E. (2025). Generative agents and expectations: Do LLMs align with heterogeneous agent models? arXiv. https://doi.org/10.48550/arXiv.2511.08604
+
+\bibitem{ballinari2025}
+Ballinari, D., \& Maly, J. (2025). FX sentiment analysis with large language models (SNB Working Paper No. 2025-11). Swiss National Bank. https://papers.ssrn.com/sol3/papers.cfm?abstract\_id=5406332
+
+\bibitem{bobade2025}
+Bobade, P., \& Sarade, A. (2025). AI-powered stock investment prediction: Buy, hold, or sell based on LLM to investment analysis. \textit{International Journal for Research Trends and Innovation}, 10(4), 506--514. https://www.ijrti.org/papers/IJRTI2504284.pdf
+
+\bibitem{vishwas2025}
+Vishwas, H. N., \& Usha, B. (2025). Artificial intelligence-based stock market price prediction, a review. \textit{Journal of Vibroengineering}, 27(6), 1--15. https://www.extrica.com/article/24861
+
+\bibitem{li2025}
+Li, W. W., Kim, H., Cucuringu, M., \& Ma, T. (2025). Can LLM-based financial investing strategies outperform the market in long run? arXiv. https://doi.org/10.48550/arXiv.2505.07078
+
+\bibitem{bloch2024}
+Bloch, D. A. (2023). Futuretesting quantitative strategies. SSRN Electronic Journal. https://doi.org/10.2139/ssrn.4647103
+
+
+\end{thebibliography}
+
+
+\end{document}

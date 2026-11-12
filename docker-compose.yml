@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: virtual_assistant_api
+    ports:
+      - "8000:8000"
+    environment:
+      # Gemini Configuration
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      
+      # Local SQLite Configuration
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH:-/app/data/workmind.db}
+      
+      # Application Settings
+      - DEBUG=${DEBUG:-True}
+      - HOST=${HOST:-0.0.0.0}
+      - PORT=${PORT:-8000}
+      - DEFAULT_LLM_MODEL=${DEFAULT_LLM_MODEL:-gemini-3-flash-preview}
+      - MAX_TOKENS=${MAX_TOKENS:-4000}
+      - TEMPERATURE=${TEMPERATURE:-0.7}
+    volumes:
+      # SQLite database storage
+      - ./data:/app/data
+    restart: unless-stopped
+    
+    # Health check to ensure the API is running properly
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Optional: Add a separate service for development with file watching
+  dev:
+    build: .
+    container_name: virtual_assistant_dev
+    ports:
+      - "8001:8000"
+    environment:
+      # Same environment variables as above
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - DEFAULT_LLM_MODEL=${DEFAULT_LLM_MODEL:-gemini-3-flash-preview}
+      - SQLITE_DB_PATH=${SQLITE_DB_PATH:-/app/data/workmind.db}
+      - DEBUG=True
+      - HOST=0.0.0.0
+      - PORT=8000
+    volumes:
+      # Mount source code for development (enables hot reloading)
+      - .:/app
+      - ./data:/app/data
+    restart: unless-stopped
+    profiles:
+      - dev  # Only start when 'dev' profile is specified
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--log-level", "debug"] 

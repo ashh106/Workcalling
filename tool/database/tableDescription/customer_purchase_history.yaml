@@ -1,0 +1,27 @@
+table_id: customer_purchase_history
+dataset_id: local
+table_description: SQLite table containing full customer purchase history with order
+  details, customer demographics, product information, pricing breakdown, discounts,
+  profit margins, and warranty data. Includes high-value GPU purchases by research
+  institution buyers such as Dr. Sanjeev Sharma at IIIT Pune.
+headers:
+  order_number: Unique order identifier (e.g. ORD0643474)
+  customer_id: Unique customer identifier (e.g. CUST000001)
+  name: Full name of the customer
+  address: Full street address of the customer
+  city: City where the customer is located
+  country: Country where the customer is located
+  continent: Continent of the customer's location
+  purchase_date: Date of purchase normalized as YYYY-MM-DD
+  payment_method: Payment method used, such as PayPal, Credit Card, Debit Card, or Wire Transfer
+  product: Name of the product purchased
+  product_category: High-level product category, such as Electronics, Clothing, Books, Furniture, or Groceries
+  quantity: Number of units purchased in this order line
+  product_id: Internal product identifier code
+  product_price: Unit selling price for the product in USD
+  cost_price: Unit cost price (supplier/wholesale price) in USD
+  discount_percentage: Percentage discount applied to the product price
+  discounted_price: Unit price after applying the discount
+  final_price: Total amount paid for the line (discounted_price multiplied by quantity)
+  profit: Total profit for the line (final_price minus cost_price multiplied by quantity)
+  warranty_period: Warranty duration for the product, such as 36 months or No Warranty

@@ -1,0 +1,16 @@
+Copyright © 2025 Piyush Kulkarni. All rights reserved.
+
+This software is provided to piyush khadgi for review and evaluation purposes only.  
+The client is granted a limited, non-transferable, non-commercial license to use, test, and evaluate the codebase.
+
+Full rights, including the right to use, modify, distribute, or deploy this software in any form,  
+will be granted only upon receipt of full agreed payment.
+
+Until payment is completed:
+- You may not use this code in any production or commercial environment.
+- You may not share or redistribute the code.
+- You may not claim ownership or authorship of the code.
+
+By using this code, you agree to the above terms.
+
+For license activation or questions, contact: Kulkarnipiyush462@gmail.com

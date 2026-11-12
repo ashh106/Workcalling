@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+
+# Python virtual environments
+venv/
+.env
+
+# Git
+.git/
+.gitignore
+
+# Cache & logs
+*.log
+*.cache
+
+# Desktop / IDE
+.idea/
+.vscode/
+*.swp
+
+# Other large/unnecessary files
+*.png
+*.jpg
+*.jpeg
+*.drawio
+uploads/
+downloads/ 
