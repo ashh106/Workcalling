@@ -1,4 +1,4 @@
-# Workmind
+# WorkCalling
 
 **Workmind** is an agentic AI data analyst assistant that turns natural-language questions into tool-backed actions. It combines a **FastAPI** backend, **Gemini function calling** (via the `google-genai` SDK), a local **SQLite** database, **YAML-based schema metadata**, and an **Electron + React** desktop frontend.
 
